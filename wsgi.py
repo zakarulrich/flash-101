@@ -7,13 +7,11 @@ app = Flask(__name__)
 
 @app.route('/api/v1/products')
 def get_products():
-    PRODUCTS = {
-        1: {'id': 1, 'name': 'Skello'},
-        2: {'id': 2, 'name': 'Socialive.tv'},
-        3: {'id': 3, 'name': 'Le Wagon'},
-    }
+    product1 = {'id': 1, 'name': 'Skello'}
+    product2 = {'id': 2, 'name': 'Socialive.tv'}
+    product3 = {'id': 3, 'name': 'Le Wagon'}
     return jsonify(
-        PRODUCTS
+        product1, product2, product3
     )
 
 

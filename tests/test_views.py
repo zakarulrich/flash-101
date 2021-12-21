@@ -9,7 +9,13 @@ class TestViews(TestCase):
 
     def test_read_many_products(self):
         response = self.client.get("/api/v1/products")
-        print(response)
         products = response.json
         self.assertIsInstance(products, list)
         self.assertGreater(len(products), 2)
+
+    def test_read_product(self):
+        response = self.client.get("/api/v1/products/1")
+        product = response.json
+        status_code = response.status_code
+        self.assertIs(status_code, 200)
+        self.assertIs(product.id, 1)
