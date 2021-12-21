@@ -1,0 +1,15 @@
+name: Check push
+on: [push]
+jobs:
+  build:
+    - uses: actions/checkout@v2
+    - name: Python 3.8 installation
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Python dependencies installation
+      run: |
+        pip install pipenv
+        pipenv install --dev
+    - name: Test launch
+      run: pipenv run nosetests
