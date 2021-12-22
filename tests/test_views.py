@@ -28,3 +28,14 @@ class TestViews(TestCase):
     def test_delete_exist_product(self):
         response = self.client.delete("/api/v1/products/2")
         self.assertEquals(response.status_code, 204)
+
+    def test_create_product(self):
+        headers = {'Content-Type': 'application/json'}
+        response = self.client.post(
+            "/api/v1/products", json={'name': 'HistoVec'}, headers=headers)
+        print(response.data)
+        # product = json.loads(response.data)
+        # self.assertIsInstance(product, json)
+        # self.assertTrue("id" in product)
+        # self.assertTrue("name" in product)
+        self.assertEquals(response.status_code, 201)
