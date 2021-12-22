@@ -9,6 +9,7 @@ jobs:
         python-version: 3.8
     - name: Python dependencies installation
       run: |
+        python -m pip install --upgrade pip
         pip install pipenv
         pipenv install --dev
     - name: Test launch
