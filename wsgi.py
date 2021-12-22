@@ -1,7 +1,7 @@
 # wsgi.py
 # pylint: disable=missing-docstring
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, abort
 app = Flask(__name__)
 
 PRODUCTS = [{'id': 1, 'name': 'Skello'},
@@ -14,18 +14,28 @@ def get_product(id):
 
     for p in PRODUCTS:
         if(p['id'] == int(id)):
-            return p
+            return p, 200
 
-    return jsonify(status_code=404)
+    abort(404)
 
 
 @app.route('/api/v1/products')
 def get_products():
     return jsonify(
         PRODUCTS
-    )
+    ), 200
 
 
-@app.route('/')
+@app.route('/api/v1/products/<id>', methods=['DELETE'])
+def delete_product(id):
+    for index, p in enumerate(PRODUCTS):
+        if(p['id'] == int(id)):
+            del PRODUCTS[index]
+            return '', 204
+
+    abort(404)
+
+
+@ app.route('/')
 def hello():
     return "Hello World!"
